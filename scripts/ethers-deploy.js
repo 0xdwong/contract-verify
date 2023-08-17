@@ -1,13 +1,13 @@
 require('dotenv').config();
 const ethers = require('ethers');
 
-const Simple = require('../build/contracts/Simple.json')
+const contractObj = require('../build/contracts/MyErc20.json')
 
 async function deploy(env) {
-    let factory = new ethers.ContractFactory(Simple.abi, Simple.bytecode, env.wallet);
+    let factory = new ethers.ContractFactory(contractObj.abi, contractObj.bytecode, env.wallet);
     let contract = await factory.deploy();
     await contract.deployed();
-    console.log("✓ Contract deployed:", Simple.contractName, contract.address);
+    console.log("✓ Contract deployed:", contractObj.contractName, contract.address);
     return contract.address;
 }
 
